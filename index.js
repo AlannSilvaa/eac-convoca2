@@ -1,17 +1,16 @@
-const { PrismaClient } = require('@prisma/client');
-const { error } = require('console');
-const prisma = new PrismaClient
-const express = require('express')
+import express from 'express';
+import { router } from './router/routes.js';
+
 const app = express();
 
-app.get('/', (req, res) => (res.send('Holla')))
+app.use(express.json());
+
+app.use(router)
 
 app.listen(3000, () => (console.log('Este servidor esta corriendo en el puerto 3000 como vos pediste :)')))
 
-
 async function ListaDeConvocados() {
 
-    // Lista de todos los jugadores
     const jugadores = [
         { nombre: 'Sergio Rochet', edad: 33, equipo: "Internacional"},
         { nombre: 'Franco Israel', edad: 23, equipo: "Sporting CP"},
