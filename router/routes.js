@@ -1,8 +1,10 @@
 import express from "express"
-import { userController } from "../controllers/userControllers.js";
+import { getPlayers } from "../controllers/userControllers.js";
+import { newPlayer } from "../controllers/userControllers.js";
 
 const router = express.Router();
 
-router.get('/jugadores', userController)
+router.get('/jugadores', getPlayers)
+router.post('/nuevojugador', newPlayer)
 
 export { router }; 
