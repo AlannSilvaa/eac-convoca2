@@ -10,9 +10,10 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Jugadores {
+model jugadores {
   id Int @id @default(autoincrement())
   nombre String
   edad Int
   equipo String
 }
+
