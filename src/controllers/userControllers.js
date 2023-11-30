@@ -9,7 +9,7 @@ const getPlayers = async (req, res) => {
         res.json(user)
     } catch (err) {
         console.error(err);
-        res.status(400).json({ error: err });
+        res.status(500).json({ error: err });
       }
     }
 
@@ -30,7 +30,8 @@ const newPlayer = async (req, res) => {
                 equipo: equipo,
             }
         })
-        res.status(200).json({message: "Creado"})
+        
+        res.status(201).json({message: "Creado"})
     }catch (err){
         console.error(err);
         res.status(400).json({ error: err });
