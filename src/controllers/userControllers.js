@@ -38,4 +38,24 @@ const newPlayer = async (req, res) => {
     }
 }
 
-export { getPlayers, newPlayer };
+
+const getPlayersByID = async (req,res) => {
+    const playerId = parseInt(req.params.id);
+
+    try  {
+        const player = await prisma.jugadores.findUnique({
+            where: { id: playerId},
+        });
+
+        if (!player) {
+            return  res.status(404).json({ mensaje: "No se encuentra este jugador" });
+        }
+        res.json(player);
+    }catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err });
+      }
+} 
+
+
+export { getPlayers, newPlayer, getPlayersByID };
