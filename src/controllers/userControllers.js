@@ -58,4 +58,27 @@ const getPlayersByID = async (req,res) => {
 } 
 
 
-export { getPlayers, newPlayer, getPlayersByID };
+const deletePlayer = async (req, res) => {
+    const playerId = parseInt(req.params.id);
+
+    try  {
+        const player = await prisma.jugadores.findUnique({
+            where: { id: playerId},
+        });
+
+        if (!player) {
+            return  res.status(404).json({ mensaje: "No se encuentra este jugador" });
+        }
+
+        await prisma.jugadores.delete({
+            where: { id: playerId}
+        })
+
+        res.json({ mensaje: 'El jugador se elimino perfectamente'})
+}catch (err) {
+    console.error(err);
+    res.status(500).json({ error: err });
+  }
+}
+
+export { getPlayers, newPlayer, getPlayersByID, deletePlayer };
